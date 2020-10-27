@@ -1,33 +1,30 @@
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-        console.log("Logged in");
-
-        var user = firebase.auth().currentUser;
-
-        window.onload = function(){
-            this.getdata();
+        if (document.readyState === "complete") {
+            getdata(firebase.auth().currentUser);
         }
-
+        else {
+            console.log(document.readyState);
+            document.addEventListener('readystatechange', function (event) {
+                getdata(firebase.auth().currentUser);
+            });
+        }
     } else {
       // No user is signed in.
       console.log("No user");
     }
 });
 
-function getdata(){
+function getdata(user){
     var myUserId = user.uid;
-    firebase.database().ref( myUserId + 'Animals/').once('value').then(function(snapshot){
+    firebase.database().ref("Farms/" +myUserId + '/Animals/').once('value').then(function(snapshot){
       var livestock_div=document.getElementById('livestock');
       livestock_div.innerHTML="";
       //get data from firebase
       var data=snapshot.val();
       console.log(data);
       for(let[key,value] of Object.entries(data)){
-        livestock_div.innerHTML="<div class='col-sm-4 mt-2 mb-1'>"+
-        "<div class='card'>"+
-        "<img src='"+value.imageURL+"' style='height:250px;'>"+
-        "<div class='card-body'><p class='card-text'>"+value.tagNumber+"</p>"+
-        "</div></div></div>"+posts_div.innerHTML;
+          livestock_div.innerHTML="<tr><th><img src='"+value.imageUrl+"' style='height:50px; width:50px; border-radius:25px; object-fit: cover;'>" + "</th><td>"+value.tagNumber+"</td><td>"+value.breed+"</td><td>"+value.weight+"</td><td>"+value.year+"</td></tr><tr>"+livestock_div.innerHTML;
       }
     
     });

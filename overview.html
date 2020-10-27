@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title>Firebase Login</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h3>Welcome User</h3>
+    <p id="user_para">Welcome. You're currently logged in.</p>
+    <button onclick="logout()">Logout</button>
+
+    <div class="row mt-4" id="livestock">
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+
+    <script>
+     // Your web app's Firebase configuration
+     var firebaseConfig = {
+      apiKey: "AIzaSyAhLcst0czUK5IehmjZUKmr7jXQq9OMb1M",
+      authDomain: "herdhoncho-b8448.firebaseapp.com",
+      databaseURL: "https://herdhoncho-b8448.firebaseio.com",
+      projectId: "herdhoncho-b8448",
+      storageBucket: "herdhoncho-b8448.appspot.com",
+      messagingSenderId: "455781345940",
+      appId: "1:455781345940:web:45d65df9a119e69d5a2281"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="overview.js"></script>
+</body>
+</html>
